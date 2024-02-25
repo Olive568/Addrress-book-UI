@@ -12,7 +12,7 @@
         <TextBox HorizontalAlignment="Left" Margin="468,217,0,0" Name="Phone" TextWrapping="Wrap" Text="Phone number" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
         <TextBox HorizontalAlignment="Left" Margin="468,156,0,0" Name="Address" TextWrapping="Wrap" Text="Address" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
         <TextBox HorizontalAlignment="Left" Margin="468,88,0,0" Name="Name" TextWrapping="Wrap"  Text="Name" FontSize="20" TextAlignment="Center"  VerticalAlignment="Top" Width="217" Height="46" TextChanged="Name_TextChanged"/>
-        <ComboBox HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top" Width="156"/>
+        <ComboBox Name="CB" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top" Width="156" SelectionChanged="ComboBox_SelectionChanged"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="468,346,0,0" VerticalAlignment="Top" Width="63" Height="40"/>
         <Button Content="Remove" HorizontalAlignment="Left" Margin="545,346,0,0" VerticalAlignment="Top" Width="63" Height="40"/>
         <Button Content="Update" HorizontalAlignment="Left" Margin="622,346,0,0" VerticalAlignment="Top" Width="63" Height="40"/>
