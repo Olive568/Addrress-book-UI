@@ -11,6 +11,7 @@ namespace Addrress_book
     /// </summary>
     public partial class MainWindow : Window
     {
+        string selectedItem = "";
         bool adding = false;
         public int selected = 0;
         public List<string[]> Database = new List<string[]>();
@@ -48,6 +49,7 @@ namespace Addrress_book
 
         private void PopulateComboBox()
         {
+            CB.Items.Clear();
             foreach (string[] entry in Database)
             {
                 CB.Items.Add(entry[0]);
@@ -56,7 +58,7 @@ namespace Addrress_book
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedItem = CB.SelectedItem?.ToString();
+            selectedItem = CB.SelectedItem?.ToString();
             for (int x = 0; x < Database.Count; x++)
             {
                 if (Database[x][0] == selectedItem)
@@ -70,20 +72,6 @@ namespace Addrress_book
             }
         }
 
-        private void Name_NameChange(object sender, TextChangedEventArgs e)
-        {
-            Name.Text
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void Button_Remove(object sender, RoutedEventArgs e)
         {
@@ -114,13 +102,6 @@ namespace Addrress_book
             Email.Margin = new Thickness(-281, 341, 0, 0);
             Address.Margin = new Thickness(-281, 341, 0, 0);
         }
-        private void SwapTextBoxPositions(TextBox textBox1, TextBox textBox2)
-        {
-            Thickness tempMargin = textBox1.Margin;
-            textBox1.Margin = textBox2.Margin;
-            textBox2.Margin = tempMargin;
-        }
-
         private void Button_Update(object sender, RoutedEventArgs e)
         {
             adding = false;
@@ -132,28 +113,50 @@ namespace Addrress_book
 
         private void Button_Submit(object sender, RoutedEventArgs e)
         {
+            if(adding)
+            {
+                Name.Margin = Name_Copy.Margin;
+                Phone.Margin = Phone_Copy.Margin;
+                Email.Margin = Email_Copy.Margin;
+                Address.Margin = Address_Copy.Margin;
+                Name_Copy.Margin = new Thickness(-281, 341, 0, 0);
+                Phone_Copy.Margin = new Thickness(-281, 341, 0, 0);
+                Address_Copy.Margin = new Thickness(-281, 341, 0, 0);
+                Email_Copy.Margin = new Thickness(-281, 341, 0, 0);
+            }
             Submit.Margin = new Thickness(-281, 341, 0, 0);
             AddBtn.Margin = new Thickness(463, 346, 0, 0);
             RemoveBtn.Margin = new Thickness(545,346,0, 0);
             UpdateBtn.Margin = new Thickness(622, 346, 0, 0);
-            Name.Margin = Name_Copy.Margin;
-            Phone.Margin = Phone_Copy.Margin;
-            Email.Margin = Email_Copy.Margin;
-            Address.Margin = Address_Copy.Margin;
-            Name_Copy.Margin = new Thickness(-281, 341, 0, 0);
-            Phone_Copy.Margin = new Thickness(-281, 341, 0, 0);
-            Address_Copy.Margin = new Thickness(-281, 341, 0, 0);
-            Email_Copy.Margin = new Thickness(-281, 341, 0, 0);
+            
             if(adding)
             {
                 string[] add = new string[4];
-                add[0] = Name.Text + ",";
-                add[1] = Address.Text + ",";
-                add[2] = Phone.Text + ",";
-                add[3] = Email.Text;
+                add[0] = Name_Copy.Text;
+                add[1] = Address_Copy.Text;
+                add[2] = Phone_Copy.Text;
+                add[3] = Email_Copy.Text;
                 Database.Add(add);
             }
+            else if(!adding)
+            {
+                int index = 0;
+                string[] add = new string[4];
+                add[0] = Name.Text;
+                add[1] = Address.Text;
+                add[2] = Phone.Text;
+                add[3] = Email.Text;
+                for(int x = 0; x < Database.Count; x++)
+                {
+                    if (Database[x][0] == selectedItem)
+                    {
+                        index = x; break;
+                    }
+                }
+                Database[index] = add;
+            }
             RewriteCSVFile();
+            PopulateComboBox();
           
         }
         private void RewriteCSVFile()
@@ -175,5 +178,28 @@ namespace Addrress_book
             }
         }
 
+        private void Name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string newText = textBox.Text;
+        }
+
+        private void Address_Copy_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string newText = textBox.Text;
+        }
+
+        private void Phone_Copy_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string newText = textBox.Text;
+        }
+
+        private void Email_Copy_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            string newText = textBox.Text;
+        }
     }
 }
