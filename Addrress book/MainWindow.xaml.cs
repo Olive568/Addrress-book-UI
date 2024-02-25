@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
 
 namespace Addrress_book
 {
@@ -21,31 +11,53 @@ namespace Addrress_book
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool adding = false;
+        public int selected = 0;
         public List<string[]> Database = new List<string[]>();
+
         public MainWindow()
         {
             InitializeComponent();
-            using (StreamReader sr = new StreamReader("Address.csv"))
+            LoadDataFromCSV();
+            PopulateComboBox();
+        }
+
+        private void LoadDataFromCSV()
+        {
+            try
             {
-                string[] splitter = new string[4];
-                string line = "";
-                while ((line = sr.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader("Address.csv"))
                 {
-                    splitter = line.Split(',');
-                    Database.Add(splitter);
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] splitter = line.Split(',');
+                        Database.Add(splitter);
+                    }
                 }
             }
-            for(int x = 0; x < Database.Count; x++) 
+            catch (FileNotFoundException ex)
             {
-                CB.Items.Add(Database[x][0]);
+                MessageBox.Show("Address.csv file not found: " + ex.Message);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error reading Address.csv: " + ex.Message);
+            }
+        }
 
+        private void PopulateComboBox()
+        {
+            foreach (string[] entry in Database)
+            {
+                CB.Items.Add(entry[0]);
+            }
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedItem = CB.SelectedItem?.ToString();
-            for(int x = 0; x < Database.Count; x++)
+            for (int x = 0; x < Database.Count; x++)
             {
                 if (Database[x][0] == selectedItem)
                 {
@@ -53,16 +65,115 @@ namespace Addrress_book
                     Address.Text = Database[x][1];
                     Phone.Text = Database[x][2];
                     Email.Text = Database[x][3];
+                    selected = x;
                 }
             }
         }
-        private void Name_TextChanged(object sender, TextChangedEventArgs e)
+
+        private void Name_NameChange(object sender, TextChangedEventArgs e)
         {
-            // Your event handling code here
+            Name.Text
         }
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Your event handling code here
+
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Remove(object sender, RoutedEventArgs e)
+        {
+            if (CB.SelectedIndex != -1)
+            {
+                Database.RemoveAt(selected);
+                CB.Items.RemoveAt(selected);
+            }
+            else
+            {
+                MessageBox.Show("Please select an item to remove.");
+            }
+        }
+
+        private void Button_Add(object sender, RoutedEventArgs e)
+        {
+            adding = true;
+            Submit.Margin = new Thickness(545, 346, 0, 0);
+            AddBtn.Margin = new Thickness(-281, 341, 0, 0);
+            RemoveBtn.Margin = new Thickness(-281, 341, 0, 0);
+            UpdateBtn.Margin = new Thickness(-281, 341, 0, 0);
+            Name_Copy.Margin = Name.Margin;
+            Phone_Copy.Margin = Phone.Margin;
+            Address_Copy.Margin = Address.Margin;
+            Email_Copy.Margin = Email.Margin;
+            Name.Margin = new Thickness(-281, 341, 0, 0);
+            Phone.Margin = new Thickness(-281, 341, 0, 0);
+            Email.Margin = new Thickness(-281, 341, 0, 0);
+            Address.Margin = new Thickness(-281, 341, 0, 0);
+        }
+        private void SwapTextBoxPositions(TextBox textBox1, TextBox textBox2)
+        {
+            Thickness tempMargin = textBox1.Margin;
+            textBox1.Margin = textBox2.Margin;
+            textBox2.Margin = tempMargin;
+        }
+
+        private void Button_Update(object sender, RoutedEventArgs e)
+        {
+            adding = false;
+            Submit.Margin = new Thickness(545, 346, 0, 0);
+            AddBtn.Margin = new Thickness(-281, 341, 0, 0);
+            RemoveBtn.Margin = new Thickness(-281, 341, 0, 0);
+            UpdateBtn.Margin = new Thickness(-281, 341, 0, 0);
+        }
+
+        private void Button_Submit(object sender, RoutedEventArgs e)
+        {
+            Submit.Margin = new Thickness(-281, 341, 0, 0);
+            AddBtn.Margin = new Thickness(463, 346, 0, 0);
+            RemoveBtn.Margin = new Thickness(545,346,0, 0);
+            UpdateBtn.Margin = new Thickness(622, 346, 0, 0);
+            Name.Margin = Name_Copy.Margin;
+            Phone.Margin = Phone_Copy.Margin;
+            Email.Margin = Email_Copy.Margin;
+            Address.Margin = Address_Copy.Margin;
+            Name_Copy.Margin = new Thickness(-281, 341, 0, 0);
+            Phone_Copy.Margin = new Thickness(-281, 341, 0, 0);
+            Address_Copy.Margin = new Thickness(-281, 341, 0, 0);
+            Email_Copy.Margin = new Thickness(-281, 341, 0, 0);
+            if(adding)
+            {
+                string[] add = new string[4];
+                add[0] = Name.Text + ",";
+                add[1] = Address.Text + ",";
+                add[2] = Phone.Text + ",";
+                add[3] = Email.Text;
+                Database.Add(add);
+            }
+            RewriteCSVFile();
+          
+        }
+        private void RewriteCSVFile()
+        {
+            using (StreamWriter sw = new StreamWriter("Address.csv"))
+            {
+                foreach (string[] entry in Database)
+                {
+                    for (int y = 0; y < entry.Length; y++)
+                    {
+                        sw.Write(entry[y]);
+                        if (y < entry.Length - 1)
+                        {
+                            sw.Write(",");
+                        }
+                    }
+                    sw.WriteLine();
+                }
+            }
+        }
+
     }
 }

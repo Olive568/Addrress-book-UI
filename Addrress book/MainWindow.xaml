@@ -7,15 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="Gray">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="30,35,0,0" Name="Search" TextWrapping="Wrap" Text="Search"  FontSize="25"  VerticalAlignment="Top" Width="156" Height="32" TextChanged="TextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Margin="30,35,0,0" Name="Search" TextWrapping="Wrap" Text="Search"  FontSize="25"  VerticalAlignment="Top" Width="156" Height="32" TextChanged="TextBox_NameChange"/>
         <TextBox HorizontalAlignment="Left" Margin="468,279,0,0" Name="Email"  TextWrapping="Wrap" Text="Email" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
         <TextBox HorizontalAlignment="Left" Margin="468,217,0,0" Name="Phone" TextWrapping="Wrap" Text="Phone number" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
         <TextBox HorizontalAlignment="Left" Margin="468,156,0,0" Name="Address" TextWrapping="Wrap" Text="Address" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
         <TextBox HorizontalAlignment="Left" Margin="468,88,0,0" Name="Name" TextWrapping="Wrap"  Text="Name" FontSize="20" TextAlignment="Center"  VerticalAlignment="Top" Width="217" Height="46" TextChanged="Name_TextChanged"/>
         <ComboBox Name="CB" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top" Width="156" SelectionChanged="ComboBox_SelectionChanged"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="468,346,0,0" VerticalAlignment="Top" Width="63" Height="40"/>
-        <Button Content="Remove" HorizontalAlignment="Left" Margin="545,346,0,0" VerticalAlignment="Top" Width="63" Height="40"/>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="622,346,0,0" VerticalAlignment="Top" Width="63" Height="40"/>
+        <Button Content="Add" Name="AddBtn" HorizontalAlignment="Left" Margin="468,346,0,0" VerticalAlignment="Top" Width="63" Height="40" Click="Button_Add"/>
+        <Button Content="Remove" Name="RemoveBtn" HorizontalAlignment="Left" Margin="545,346,0,0" VerticalAlignment="Top" Width="63" Height="40" Click="Button_Remove"/>
+        <Button Content="Update" Name="UpdateBtn" HorizontalAlignment="Left" Margin="622,346,0,0" VerticalAlignment="Top" Width="63" Height="40" Click="Button_Update"/>
+        <TextBox HorizontalAlignment="Left" Margin="-321,125,0,0" x:Name="Name_Copy" TextWrapping="Wrap"  Text="Add name" FontSize="20" TextAlignment="Center"  VerticalAlignment="Top" Width="217" Height="46" TextChanged="Name_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Margin="-321,179,0,0" x:Name="Address_Copy" TextWrapping="Wrap" Text="Add Address" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
+        <TextBox HorizontalAlignment="Left" Margin="-321,230,0,0" x:Name="Phone_Copy" TextWrapping="Wrap" Text="Add Phone number" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
+        <TextBox HorizontalAlignment="Left" Margin="-321,281,0,0" x:Name="Email_Copy"  TextWrapping="Wrap" Text="Add Email" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
+        <Button Content="Submit" Name="Submit" HorizontalAlignment="Left" Margin="-281,341,0,0" VerticalAlignment="Top" Width="137" Height="40" Click="Button_Submit"/>
 
     </Grid>
 </Window>
