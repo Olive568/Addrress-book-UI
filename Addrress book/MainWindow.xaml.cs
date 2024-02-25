@@ -44,7 +44,17 @@ namespace Addrress_book
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            string selectedItem = CB.SelectedItem?.ToString();
+            for(int x = 0; x < Database.Count; x++)
+            {
+                if (Database[x][0] == selectedItem)
+                {
+                    Name.Text = Database[x][0];
+                    Address.Text = Database[x][1];
+                    Phone.Text = Database[x][2];
+                    Email.Text = Database[x][3];
+                }
+            }
         }
         private void Name_TextChanged(object sender, TextChangedEventArgs e)
         {
