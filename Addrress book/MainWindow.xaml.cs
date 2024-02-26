@@ -220,5 +220,14 @@ namespace Addrress_book
                 PopulateComboBox();
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Do you want to exit?", " Yes or No? ", MessageBoxButton.YesNo);
+            if(result == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+        }
     }
 }

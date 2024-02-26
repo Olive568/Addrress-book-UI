@@ -21,7 +21,8 @@
         <TextBox HorizontalAlignment="Left" Margin="-321,230,0,0" x:Name="Phone_Copy" TextWrapping="Wrap" Text="Add Phone number" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46" TextChanged="Phone_Copy_TextChanged"/>
         <TextBox HorizontalAlignment="Left" Margin="-321,281,0,0" x:Name="Email_Copy"  TextWrapping="Wrap" Text="Add Email" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46" TextChanged="Email_Copy_TextChanged"/>
         <Button Content="Submit" Name="Submit" HorizontalAlignment="Left" Margin="-281,341,0,0" VerticalAlignment="Top" Width="137" Height="40" Click="Button_Submit"/>
-        <Label Content="AddressDB" FontSize="50" FontStyle="Italic" FontFamily="Georgia" HorizontalAlignment="Center" Margin="0,11,0,0" VerticalAlignment="Top" Height="83" Width="270"/>
+        <Label Content="AddressDB" Background="AliceBlue" FontSize="50" FontStyle="Italic" FontFamily="Georgia" HorizontalAlignment="Center" Margin="0,11,0,0" VerticalAlignment="Top" Height="65" Width="270"/>
+        <Button Content="X"  FontSize="30" HorizontalAlignment="Left" Background="Red" Margin="728,11,0,0" VerticalAlignment="Top" Height="43" Width="38" Click="Button_Click"/>
 
     </Grid>
 </Window>
