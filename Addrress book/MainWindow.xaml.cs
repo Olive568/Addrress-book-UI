@@ -22,7 +22,6 @@ namespace Addrress_book
             LoadDataFromCSV();
             PopulateComboBox();
         }
-
         private void LoadDataFromCSV()
         {
             try
@@ -200,6 +199,26 @@ namespace Addrress_book
         {
             TextBox textBox = (TextBox)sender;
             string newText = textBox.Text;
+        }
+
+        private void Search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string namesearch = Search.Text;
+            PopulateComboBoxSearch(namesearch);
+        }
+        private void PopulateComboBoxSearch(string namesearch)
+        {
+            foreach (string[] data in Database)
+            {
+                if (!data[0].Contains(namesearch)) 
+                {
+                    CB.Items.Remove(data[0]);
+                }
+            }
+            if(Search.Text == "")
+            {
+                PopulateComboBox();
+            }
         }
     }
 }

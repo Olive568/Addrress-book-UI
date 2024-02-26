@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="Gray">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="30,35,0,0" Name="Search" TextWrapping="Wrap" Text="Search"  FontSize="25"  VerticalAlignment="Top" Width="156" Height="32"/>
+        <TextBox HorizontalAlignment="Left" Margin="30,35,0,0" Name="Search" TextWrapping="Wrap" Text="Search"  FontSize="25"  VerticalAlignment="Top" Width="156" Height="32" TextChanged="Search_TextChanged"/>
         <TextBox HorizontalAlignment="Left" Margin="468,279,0,0" Name="Email"  TextWrapping="Wrap" Text="Email" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
         <TextBox HorizontalAlignment="Left" Margin="468,217,0,0" Name="Phone" TextWrapping="Wrap" Text="Phone number" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
         <TextBox HorizontalAlignment="Left" Margin="468,156,0,0" Name="Address" TextWrapping="Wrap" Text="Address" FontSize="20" TextAlignment="Center" VerticalAlignment="Top" Width="217" Height="46"/>
