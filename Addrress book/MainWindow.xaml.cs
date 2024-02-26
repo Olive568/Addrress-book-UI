@@ -6,9 +6,6 @@ using System.Windows.Controls;
 
 namespace Addrress_book
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         string selectedItem = "";
