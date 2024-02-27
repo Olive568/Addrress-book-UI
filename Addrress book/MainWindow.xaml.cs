@@ -151,6 +151,10 @@ namespace Addrress_book
                 }
                 Database[index] = add;
             }
+            Name_Copy.Text = "Add name";
+            Address_Copy.Text = "Add Address";
+            Phone_Copy.Text = "Add Phone Number";
+            Email_Copy.Text = "Add Email";
             RewriteCSVFile();
             PopulateComboBox();
           
